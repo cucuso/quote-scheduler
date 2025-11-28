@@ -1,10 +1,23 @@
-FROM eclipse-temurin:21-jdk
-
+# ---------- Stage 1: build the JAR ----------
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
-COPY target/*.jar app.jar
+# Copy pom first so Maven can cache dependencies
+COPY pom.xml .
+RUN mvn -q -DskipTests dependency:go-offline
 
-ENV PORT=8080
+# Now copy the actual source and build
+COPY src ./src
+RUN mvn -q -DskipTests package
+
+# ---------- Stage 2: run the JAR ----------
+FROM eclipse-temurin-21-jre
+WORKDIR /app
+
+# Copy the built JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
+
+# Spring Boot will listen on 8080 by default
 EXPOSE 8080
 
-ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${PORT}"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
