@@ -11,13 +11,12 @@ COPY src ./src
 RUN mvn -q -DskipTests package
 
 # ---------- Stage 2: run the JAR ----------
-FROM eclipse-temurin-21-jre
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # Copy the built JAR from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Spring Boot will listen on 8080 by default
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
