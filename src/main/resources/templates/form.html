@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Service Intake Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Palette */
+    --primary-color: #4F46E5;
+    --primary-hover: #4338CA;
+    --secondary-color: #06B6D4;
+    --success-color: #10B981;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-light: #9CA3AF;
+    --bg-primary: #F9FAFB;
+    --bg-secondary: #FFFFFF;
+    --border-color: #E5E7EB;
+    --border-hover: #D1D5DB;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+
+    /* Transitions */
+    --transition-fast: 150ms ease-in-out;
+    --transition-normal: 250ms ease-in-out;
+    --transition-slow: 350ms ease-in-out;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(180deg, #f6f9fc 0%, #e9ecef 100%);
+    min-height: 100vh;
+    padding: var(--spacing-xl) var(--spacing-md);
+    color: #30313d;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.form-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+    padding: var(--spacing-2xl);
+    animation: fadeInUp 0.6s ease-out;
+    border: 1px solid #e3e8ee;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header Styles */
+.form-header {
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.company-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    transition: var(--transition-normal);
+    outline: none;
+}
+
+.company-name:hover {
+    color: var(--primary-hover);
+}
+
+.company-name:focus {
+    background: var(--bg-primary);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.language-selector label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.language-selector select {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.language-selector select:hover {
+    border-color: var(--border-hover);
+}
+
+.language-selector select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Form Section Styles - Stripe Design */
+.form-section {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl);
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e3e8ee;
+    transition: var(--transition-normal);
+}
+
+.form-section:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #30313d;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    letter-spacing: -0.02em;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #635bff;
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Quantity Table - Stripe Design */
+.quantity-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.quantity-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: #f6f9fc;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    color: #30313d;
+    align-items: center;
+    border-bottom: 1px solid #e3e8ee;
+}
+
+.item-label-header {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.quantity-options-header {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-sm);
+    text-align: center;
+}
+
+.quantity-options-header span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7785;
+}
+
+.quantity-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: #fff;
+    border-bottom: 1px solid #f6f9fc;
+    transition: var(--transition-normal);
+    align-items: center;
+}
+
+.quantity-row:last-child {
+    border-bottom: none;
+    border-radius: 0 0 8px 8px;
+}
+
+.quantity-row:hover {
+    background: #fafbfc;
+}
+
+.item-label {
+    font-size: 0.9375rem;
+    color: #30313d;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.quantity-options {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.quantity-options label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.quantity-options label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.quantity-options label span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e3e8ee;
+    border-radius: 6px;
+    background: #f6f9fc;
+    color: #6b7785;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.15s ease;
+}
+
+.quantity-options label:hover span {
+    border-color: #c7d2e0;
+    background: #fff;
+    transform: scale(1.05);
+}
+
+.quantity-options label input[type="radio"]:checked+span {
+    background: #635bff;
+    border-color: #635bff;
+    color: white;
+    box-shadow: 0 2px 4px rgba(99, 91, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.quantity-options label input[type="radio"]:focus+span {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+/* Text Input Styles - Stripe Design */
+.text-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.text-input-group.full-width {
+    flex: 1 1 100%;
+}
+
+.text-input-group label {
+    font-weight: 500;
+    color: #30313d;
+    font-size: 0.875rem;
+    letter-spacing: -0.01em;
+}
+
+.text-input-group input,
+.text-input-group select,
+.text-input-group textarea {
+    padding: 10px 12px;
+    border: 1px solid #e3e8ee;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #30313d;
+    background: #f6f9fc;
+    transition: all 0.15s ease;
+    line-height: 1.5;
+}
+
+.text-input-group input:hover,
+.text-input-group select:hover,
+.text-input-group textarea:hover {
+    border-color: #c7d2e0;
+    background: #fff;
+}
+
+.text-input-group input:focus,
+.text-input-group select:focus,
+.text-input-group textarea:focus {
+    outline: none;
+    border-color: #635bff;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.1);
+}
+
+.text-input-group input::placeholder,
+.text-input-group textarea::placeholder {
+    color: #8792a2;
+}
+
+.text-input-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.help-text {
+    font-size: 0.8125rem;
+    color: #6b7785;
+    font-style: normal;
+    margin-top: 2px;
+    line-height: 1.4;
+}
+
+/* Form Row */
+.form-row {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.form-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Submit Section - Stripe Design */
+.submit-section {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-2xl);
+    border-top: 1px solid #e3e8ee;
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    padding: 12px 24px;
+    background: #635bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 4px rgba(99, 91, 255, 0.2);
+    letter-spacing: -0.01em;
+    min-width: 200px;
+}
+
+.submit-btn:hover {
+    background: #5851db;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(99, 91, 255, 0.25);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(99, 91, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .form-wrapper {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .company-name {
+        font-size: 2rem;
+    }
+
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-name {
+        font-size: 1.75rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+/* Loading Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.submit-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+/* JSON Modal Styles */
+.json-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.json-modal-content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.json-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-xl);
+    border-bottom: 2px solid var(--border-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.json-modal-header h3 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.json-modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+}
+
+.json-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.json-output {
+    flex: 1;
+    overflow: auto;
+    padding: var(--spacing-xl);
+    margin: 0;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border: none;
+    border-radius: 0;
+}
+
+.json-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.json-output::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+.json-output::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.json-output::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}
+
+.json-modal-footer {
+    padding: var(--spacing-xl);
+    border-top: 2px solid var(--border-color);
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    background: var(--bg-primary);
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.copy-json-btn,
+.json-modal-close-btn {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.copy-json-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.copy-json-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.json-modal-close-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.json-modal-close-btn:hover {
+    background: var(--bg-primary);
+    border-color: var(--border-hover);
+}
+
+@media (max-width: 768px) {
+    .json-modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .json-modal-footer {
+        flex-direction: column;
+    }
+
+    .copy-json-btn,
+    .json-modal-close-btn {
+        width: 100%;
+    }
+}
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="form-wrapper">
+        <header class="form-header">
+            <h1 class="company-name" contenteditable="true">Fast Moving LLC</h1>
+            <div class="language-selector">
+                <label for="language">Language:</label>
+                <select id="language" name="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+        </header>
+
+        <form id="intakeForm">
+            <!-- Bedroom Section -->
+            <section class="form-section">
+                <h2 class="section-title">Bedroom</h2>
+                <div class="quantity-table">
+                    <div class="quantity-header">
+                        <div class="item-label-header">Item</div>
+                        <div class="quantity-options-header">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Beds</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-beds" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-beds" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-beds" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-beds" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-beds" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-beds" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Electric bed base with motor</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-electric-bed" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-electric-bed" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-electric-bed" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-electric-bed" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-electric-bed" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-electric-bed" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Bunk bed</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-bunk-bed" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-bunk-bed" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-bunk-bed" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-bunk-bed" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-bunk-bed" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-bunk-bed" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">King mattress</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-king-mattress" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-king-mattress" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-king-mattress" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-king-mattress" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-king-mattress" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-king-mattress" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Queen mattress</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-queen-mattress" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-queen-mattress"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-queen-mattress"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-queen-mattress"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-queen-mattress"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-queen-mattress"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Full mattress</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-full-mattress" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-full-mattress" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-full-mattress" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-full-mattress" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-full-mattress" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-full-mattress" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Twin mattress</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-twin-mattress" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-twin-mattress" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-twin-mattress" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-twin-mattress" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-twin-mattress" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-twin-mattress" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Cradle</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-cradle" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-cradle" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-cradle" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-cradle" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-cradle" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-cradle" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Bedside lamp</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-bedside-lamp" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-bedside-lamp" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-bedside-lamp" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-bedside-lamp" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-bedside-lamp" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-bedside-lamp" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Dresser</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-dresser" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-dresser" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-dresser" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-dresser" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-dresser" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-dresser" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Drawer</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-drawer" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-drawer" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-drawer" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-drawer" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-drawer" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-drawer" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Vanity</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-vanity" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-vanity" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-vanity" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-vanity" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-vanity" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-vanity" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Shoe rack</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-shoe-rack" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-shoe-rack" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-shoe-rack" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-shoe-rack" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-shoe-rack" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-shoe-rack" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Big closet</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-big-closet" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-big-closet" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-big-closet" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-big-closet" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-big-closet" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-big-closet" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Ottoman</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="bedroom-ottoman" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="bedroom-ottoman" value="1"><span>1</span></label>
+                            <label><input type="radio" name="bedroom-ottoman" value="2"><span>2</span></label>
+                            <label><input type="radio" name="bedroom-ottoman" value="3"><span>3</span></label>
+                            <label><input type="radio" name="bedroom-ottoman" value="4"><span>4</span></label>
+                            <label><input type="radio" name="bedroom-ottoman" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hall Section -->
+            <section class="form-section">
+                <h2 class="section-title">Hall</h2>
+                <div class="quantity-table">
+                    <div class="quantity-header">
+                        <div class="item-label-header">Item</div>
+                        <div class="quantity-options-header">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">1 seater couch</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-1-seater-couch" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-1-seater-couch" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-1-seater-couch" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-1-seater-couch" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-1-seater-couch" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-1-seater-couch" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">2 seater couch</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-2-seater-couch" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-2-seater-couch" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-2-seater-couch" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-2-seater-couch" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-2-seater-couch" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-2-seater-couch" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">3 seater couch</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-3-seater-couch" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-3-seater-couch" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-3-seater-couch" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-3-seater-couch" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-3-seater-couch" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-3-seater-couch" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Sectional couch</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-sectional-couch" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-sectional-couch" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-sectional-couch" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-sectional-couch" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-sectional-couch" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-sectional-couch" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Reclining seat</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-reclining-seat" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-reclining-seat" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-reclining-seat" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-reclining-seat" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-reclining-seat" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-reclining-seat" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Couch bed</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-couch-bed" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-couch-bed" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-couch-bed" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-couch-bed" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-couch-bed" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-couch-bed" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Armchair</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-armchair" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="hall-armchair" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-armchair" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-armchair" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-armchair" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-armchair" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Big chair</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-big-chair" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-big-chair" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-big-chair" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-big-chair" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-big-chair" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-big-chair" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Center table</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-center-table" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-center-table" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-center-table" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-center-table" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-center-table" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-center-table" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Living table</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-living-table" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-living-table" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-living-table" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-living-table" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-living-table" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-living-table" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Console table</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-console-table" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-console-table" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-console-table" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-console-table" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-console-table" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-console-table" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Rug</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-rug" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="hall-rug" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-rug" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-rug" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-rug" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-rug" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Wall picture</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-wall-picture" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-wall-picture" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-wall-picture" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-wall-picture" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-wall-picture" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-wall-picture" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Wall mirror</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-wall-mirror" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-wall-mirror" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-wall-mirror" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-wall-mirror" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-wall-mirror" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-wall-mirror" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Floor mirror</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-floor-mirror" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-floor-mirror" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-floor-mirror" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-floor-mirror" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-floor-mirror" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-floor-mirror" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Floor lamp</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-floor-lamp" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-floor-lamp" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-floor-lamp" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-floor-lamp" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-floor-lamp" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-floor-lamp" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Large TV stand</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-large-tv-stand" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-large-tv-stand" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-large-tv-stand" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-large-tv-stand" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-large-tv-stand" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-large-tv-stand" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Small TV stand</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-small-tv-stand" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="hall-small-tv-stand" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-small-tv-stand" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-small-tv-stand" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-small-tv-stand" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-small-tv-stand" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">TV</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="hall-tv" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="hall-tv" value="1"><span>1</span></label>
+                            <label><input type="radio" name="hall-tv" value="2"><span>2</span></label>
+                            <label><input type="radio" name="hall-tv" value="3"><span>3</span></label>
+                            <label><input type="radio" name="hall-tv" value="4"><span>4</span></label>
+                            <label><input type="radio" name="hall-tv" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Dining Room Section -->
+            <section class="form-section">
+                <h2 class="section-title">Dining Room</h2>
+                <div class="quantity-table">
+                    <div class="quantity-header">
+                        <div class="item-label-header">Item</div>
+                        <div class="quantity-options-header">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Wooden dining table 4 chairs</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-wooden-dining-table-4-chairs" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-4-chairs"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-4-chairs"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-4-chairs"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-4-chairs"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-4-chairs"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Wooden dining table 6 chairs</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-wooden-dining-table-6-chairs" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-6-chairs"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-6-chairs"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-6-chairs"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-6-chairs"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-6-chairs"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Wooden dining table 8 chairs</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-wooden-dining-table-8-chairs" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-8-chairs"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-8-chairs"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-8-chairs"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-8-chairs"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-wooden-dining-table-8-chairs"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Glass or marble dining table 4 chairs</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-4-chairs" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-4-chairs"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-4-chairs"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-4-chairs"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-4-chairs"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-4-chairs"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Glass or marble dining table 6 chairs</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-6-chairs" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-6-chairs"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-6-chairs"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-6-chairs"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-6-chairs"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-glass-or-marble-dining-table-6-chairs"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Dining room sideboard</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-dining-room-sideboard" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-dining-room-sideboard"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-dining-room-sideboard"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-dining-room-sideboard"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-dining-room-sideboard"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-dining-room-sideboard"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Showcase</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="dining-showcase" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="dining-showcase" value="1"><span>1</span></label>
+                            <label><input type="radio" name="dining-showcase" value="2"><span>2</span></label>
+                            <label><input type="radio" name="dining-showcase" value="3"><span>3</span></label>
+                            <label><input type="radio" name="dining-showcase" value="4"><span>4</span></label>
+                            <label><input type="radio" name="dining-showcase" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Kitchen Section -->
+            <section class="form-section">
+                <h2 class="section-title">Kitchen</h2>
+                <div class="quantity-table">
+                    <div class="quantity-header">
+                        <div class="item-label-header">Item</div>
+                        <div class="quantity-options-header">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Refrigerator</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="kitchen-refrigerator" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="kitchen-refrigerator" value="1"><span>1</span></label>
+                            <label><input type="radio" name="kitchen-refrigerator" value="2"><span>2</span></label>
+                            <label><input type="radio" name="kitchen-refrigerator" value="3"><span>3</span></label>
+                            <label><input type="radio" name="kitchen-refrigerator" value="4"><span>4</span></label>
+                            <label><input type="radio" name="kitchen-refrigerator" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Executive refrigerator</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="kitchen-executive-refrigerator" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="kitchen-executive-refrigerator"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="kitchen-executive-refrigerator"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="kitchen-executive-refrigerator"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="kitchen-executive-refrigerator"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="kitchen-executive-refrigerator"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Freezer</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="kitchen-freezer" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="kitchen-freezer" value="1"><span>1</span></label>
+                            <label><input type="radio" name="kitchen-freezer" value="2"><span>2</span></label>
+                            <label><input type="radio" name="kitchen-freezer" value="3"><span>3</span></label>
+                            <label><input type="radio" name="kitchen-freezer" value="4"><span>4</span></label>
+                            <label><input type="radio" name="kitchen-freezer" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Counter chair</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="kitchen-counter-chair" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="kitchen-counter-chair" value="1"><span>1</span></label>
+                            <label><input type="radio" name="kitchen-counter-chair" value="2"><span>2</span></label>
+                            <label><input type="radio" name="kitchen-counter-chair" value="3"><span>3</span></label>
+                            <label><input type="radio" name="kitchen-counter-chair" value="4"><span>4</span></label>
+                            <label><input type="radio" name="kitchen-counter-chair" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Microwave</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="kitchen-microwave" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="kitchen-microwave" value="1"><span>1</span></label>
+                            <label><input type="radio" name="kitchen-microwave" value="2"><span>2</span></label>
+                            <label><input type="radio" name="kitchen-microwave" value="3"><span>3</span></label>
+                            <label><input type="radio" name="kitchen-microwave" value="4"><span>4</span></label>
+                            <label><input type="radio" name="kitchen-microwave" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- Others Section -->
+            <section class="form-section">
+                <h2 class="section-title">Others</h2>
+                <div class="quantity-table">
+                    <div class="quantity-header">
+                        <div class="item-label-header">Item</div>
+                        <div class="quantity-options-header">
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Bookcase</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-bookcase" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-bookcase" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-bookcase" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-bookcase" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-bookcase" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-bookcase" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Desk</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-desk" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="others-desk" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-desk" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-desk" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-desk" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-desk" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Computer table</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-computer-table" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-computer-table" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-computer-table" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-computer-table" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-computer-table" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-computer-table" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Office chair</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-office-chair" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-office-chair" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-office-chair" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-office-chair" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-office-chair" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-office-chair" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Treadmill</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-treadmill" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-treadmill" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-treadmill" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-treadmill" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-treadmill" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-treadmill" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Stationary bike</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-stationary-bike" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-stationary-bike"
+                                          value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-stationary-bike"
+                                          value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-stationary-bike"
+                                          value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-stationary-bike"
+                                          value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-stationary-bike"
+                                          value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Large shelf</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-large-shelf" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-large-shelf" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-large-shelf" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-large-shelf" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-large-shelf" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-large-shelf" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Small shelf</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-small-shelf" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-small-shelf" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-small-shelf" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-small-shelf" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-small-shelf" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-small-shelf" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">BBQ</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-bbq" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="others-bbq" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-bbq" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-bbq" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-bbq" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-bbq" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Floors</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-floors" value="0" checked><span>0</span></label>
+                            <label><input type="radio" name="others-floors" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-floors" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-floors" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-floors" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-floors" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Coffee table</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-coffee-table" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-coffee-table" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-coffee-table" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-coffee-table" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-coffee-table" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-coffee-table" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Patio couch</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-patio-couch" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-patio-couch" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-patio-couch" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-patio-couch" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-patio-couch" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-patio-couch" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Large box</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-large-box" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-large-box" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-large-box" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-large-box" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-large-box" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-large-box" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Medium box</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-medium-box" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-medium-box" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-medium-box" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-medium-box" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-medium-box" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-medium-box" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Small box</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-small-box" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-small-box" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-small-box" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-small-box" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-small-box" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-small-box" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Garbage bag</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-garbage-bag" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-garbage-bag" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-garbage-bag" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-garbage-bag" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-garbage-bag" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-garbage-bag" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div class="item-label">Suitcase</div>
+                        <div class="quantity-options">
+                            <label><input type="radio" name="others-suitcase" value="0"
+                                          checked><span>0</span></label>
+                            <label><input type="radio" name="others-suitcase" value="1"><span>1</span></label>
+                            <label><input type="radio" name="others-suitcase" value="2"><span>2</span></label>
+                            <label><input type="radio" name="others-suitcase" value="3"><span>3</span></label>
+                            <label><input type="radio" name="others-suitcase" value="4"><span>4</span></label>
+                            <label><input type="radio" name="others-suitcase" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+
+
+            <section class="form-section">
+                <h2 class="section-title">Additional Information</h2>
+                <div class="text-input-group">
+                    <label for="additional-notes">Any other items, doubts, etc?</label>
+                    <textarea id="additional-notes" name="additional-notes" rows="4"
+                              placeholder="Please describe any additional items or questions..."></textarea>
+                </div>
+            </section>
+
+            <!-- Contact Information -->
+            <section class="form-section">
+                <h2 class="section-title">Contact Information</h2>
+                <div class="form-row">
+                    <div class="text-input-group">
+                        <label for="full-name">Full Name *</label>
+                        <input type="text" id="full-name" name="full-name" required placeholder="John Doe">
+                    </div>
+                    <div class="text-input-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pickup Information -->
+            <section class="form-section">
+                <h2 class="section-title">Pickup Information</h2>
+                <div class="form-row">
+                    <div class="text-input-group full-width">
+                        <label for="pickup-address">Pickup Address *</label>
+                        <input type="text" id="pickup-address" name="pickup-address" required
+                               placeholder="123 Main Street">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="text-input-group">
+                        <label for="pickup-zipcode">Pickup Zipcode *</label>
+                        <input type="text" id="pickup-zipcode" name="pickup-zipcode" required placeholder="12345">
+                    </div>
+                    <div class="text-input-group">
+                        <label for="pickup-access">Pickup Access *</label>
+                        <select id="pickup-access" name="pickup-access" required>
+                            <option value="">Select access type...</option>
+                            <option value="1st-floor-house">1st floor house</option>
+                            <option value="2nd-floor">2nd floor</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="townhouse">Townhouse</option>
+                            <option value="duplex">Duplex</option>
+                            <option value="efficiency">Efficiency</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Delivery Information -->
+            <section class="form-section">
+                <h2 class="section-title">Delivery Information</h2>
+                <div class="form-row">
+                    <div class="text-input-group full-width">
+                        <label for="delivery-address">Delivery Address *</label>
+                        <input type="text" id="delivery-address" name="delivery-address" required
+                               placeholder="456 Oak Avenue">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="text-input-group">
+                        <label for="delivery-zipcode">Delivery Zipcode *</label>
+                        <input type="text" id="delivery-zipcode" name="delivery-zipcode" required
+                               placeholder="54321">
+                    </div>
+                    <div class="text-input-group">
+                        <label for="delivery-access">Delivery Access *</label>
+                        <select id="delivery-access" name="delivery-access" required>
+                            <option value="">Select access type...</option>
+                            <option value="1st-floor-house">1st floor house</option>
+                            <option value="2nd-floor">2nd floor</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="townhouse">Townhouse</option>
+                            <option value="duplex">Duplex</option>
+                            <option value="efficiency">Efficiency</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule and Source -->
+            <section class="form-section">
+                <h2 class="section-title">Schedule & Source</h2>
+                <div class="form-row">
+                    <div class="text-input-group">
+                        <label for="tentative-date">Tentative Date *</label>
+                        <input type="date" id="tentative-date" name="tentative-date" required>
+                        <p class="help-text">This date can be changed later</p>
+                    </div>
+                    <div class="text-input-group">
+                        <label for="tentative-time">Preferred Time *</label>
+                        <input type="time" id="tentative-time" name="tentative-time" required>
+                        <p class="help-text">Approximate time of day</p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="text-input-group full-width">
+                        <label for="ad-source">Where did you see this ad? *</label>
+                        <input type="text" id="ad-source" name="ad-source" required
+                               placeholder="Facebook, Google, Friend, etc.">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Submit Button -->
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Submit Form</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/translations.js"></script>
+<script src="/js/script.js"></script>
+</body>
+
+</html>
