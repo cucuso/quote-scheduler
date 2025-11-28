@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+.vscode
+*.iml
+*.iws
+*.ipr
+
+# Build output
+target/
+!target/*.jar
+*.class
+
+# Data
+data/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+*.md
+
+# Scripts
+*.sh
+
+# Maven wrapper (we use the base image's maven)
+.mvn/
+mvnw
+mvnw.cmd
