@@ -10,7 +10,7 @@
 *.iws
 *.ipr
 
-# Build output (exclude most target/ contents but keep the binary)
+# Build output (exclude unnecessary build artifacts, keep scheduler binary)
 target/classes/
 target/test-classes/
 target/maven-status/
@@ -18,7 +18,10 @@ target/maven-archiver/
 target/generated-sources/
 target/generated-test-sources/
 target/surefire-reports/
-*.class
+target/spring-aot/
+target/graalvm-reachability-metadata/
+target/*.jar
+target/*.original
 
 # Data
 data/
