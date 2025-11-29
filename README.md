@@ -70,11 +70,21 @@ A simple full-stack moving company quote request application built with Spring B
 ### Build and Run
 
 ```bash
-# Clean and build
-mvn clean install
+ # 1. Build the native image using Docker (this will take 5-10 minutes)
+  docker build -t scheduler-builder .
 
-# Run the application
-mvn spring-boot:run
+  # 2. Extract the binary from the built image
+  docker create --name temp-scheduler scheduler-builder
+  docker cp temp-scheduler:/app/scheduler ./target/scheduler
+  docker rm temp-scheduler
+
+  # 3. Verify the binary was extracted
+  ls -lh target/scheduler
+
+  # 4. Commit and push the binary
+  git add target/scheduler
+  git commit -m "Add pre-built GraalVM native binary for fast cold starts"
+  git push
 ```
 
 The application will start on `http://localhost:8080`

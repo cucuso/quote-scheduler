@@ -12,6 +12,7 @@
 
 # Build output
 target/
+!target/scheduler
 !target/*.jar
 *.class
 
