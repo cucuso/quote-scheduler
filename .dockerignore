@@ -10,8 +10,14 @@
 *.iws
 *.ipr
 
-# Build output
-target/
+# Build output (exclude most, keep JARs)
+target/classes/
+target/test-classes/
+target/maven-status/
+target/maven-archiver/
+target/generated-sources/
+target/generated-test-sources/
+target/surefire-reports/
 *.class
 
 # Data
