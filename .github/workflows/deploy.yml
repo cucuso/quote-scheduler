@@ -26,9 +26,9 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           source: "target/scheduler-1.0.jar"
-          target: "~/apps/scheduler"
+          target: "~/apps/client-scheduler"
           overwrite: true
           strip_components: 1
 
@@ -37,8 +37,8 @@ jobs:
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_HOST }}
-          username: root
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             echo "🔄 Restarting systemd service..."
             sudo systemctl daemon-reload
