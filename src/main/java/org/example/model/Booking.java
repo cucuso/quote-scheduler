@@ -20,7 +20,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    // Company name is optional for single-company use
     private String companyName;
 
     @Column(nullable = false)

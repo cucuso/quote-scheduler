@@ -40,7 +40,10 @@ public class BookingController {
         try {
             Booking booking = new Booking();
 
-            booking.setCompanyName((String) requestData.get("companyName"));
+            // Company name is optional now - use default if not provided
+            String companyName = (String) requestData.get("companyName");
+            booking.setCompanyName(companyName != null && !companyName.isEmpty() ? companyName : "default");
+            
             booking.setLanguage((String) requestData.get("language"));
             booking.setAdditionalItems((String) requestData.get("additionalItems"));
             booking.setFullName((String) requestData.get("fullName"));
@@ -71,28 +74,18 @@ public class BookingController {
         }
     }
 
-    // GET /calendar/:companyName - serves viewer page (old route for backwards compat)
-    @GetMapping("/calendar/{companyName}")
-    public String showCalendar(@PathVariable String companyName, Model model) {
-        model.addAttribute("companyName", companyName);
-        return "calendar";
-    }
-
-    // GET /api/bookings - fetch bookings with filters
+    // GET /api/bookings - fetch ALL bookings with optional date filters
     @GetMapping("/api/bookings")
     @ResponseBody
     public ResponseEntity<List<Booking>> getBookings(
-            @RequestParam(required = false) String companyName,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
             @RequestParam(required = false) String status
     ) {
         List<Booking> bookings;
 
-        if (companyName != null && from != null && to != null) {
-            bookings = bookingRepository.findByCompanyNameAndDateRange(companyName, from, to);
-        } else if (companyName != null) {
-            bookings = bookingRepository.findByCompanyName(companyName);
+        if (from != null && to != null) {
+            bookings = bookingRepository.findByDateRange(from, to);
         } else {
             bookings = bookingRepository.findAllOrderByCreatedAtDesc();
         }

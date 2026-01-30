@@ -12,13 +12,8 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    List<Booking> findByCompanyName(String companyName);
-
-    @Query("SELECT b FROM Booking b WHERE b.companyName = :companyName " +
-           "AND b.tentativeDate >= :from AND b.tentativeDate <= :to " +
-           "ORDER BY b.tentativeDate ASC")
-    List<Booking> findByCompanyNameAndDateRange(
-            @Param("companyName") String companyName,
+    @Query("SELECT b FROM Booking b WHERE b.tentativeDate >= :from AND b.tentativeDate <= :to ORDER BY b.tentativeDate ASC")
+    List<Booking> findByDateRange(
             @Param("from") LocalDate from,
             @Param("to") LocalDate to
     );

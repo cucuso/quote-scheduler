@@ -20,9 +20,6 @@ public class AuthController {
     @Value("${admin.password:admin123}")
     private String adminPassword;
 
-    @Value("${company.name:MyMovingCompany}")
-    private String companyName;
-
     // GET /login - serves login page
     @GetMapping("/login")
     public String showLogin() {
@@ -45,7 +42,6 @@ public class AuthController {
         if (adminUsername.equals(username) && adminPassword.equals(password)) {
             Map<String, String> response = new HashMap<>();
             response.put("token", UUID.randomUUID().toString());
-            response.put("companyName", companyName);
             response.put("message", "Login successful");
             return ResponseEntity.ok(response);
         } else {

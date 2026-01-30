@@ -219,7 +219,6 @@
     <nav class="navbar">
         <h1>📦 Moving Calendar</h1>
         <div class="navbar-right">
-            <span id="companyName"></span>
             <button class="btn btn-danger" onclick="logout()">Logout</button>
         </div>
     </nav>
@@ -299,9 +298,6 @@
         let currentDate = new Date();
         let bookings = [];
         let currentBooking = null;
-        const companyName = localStorage.getItem('companyName') || 'default';
-        
-        document.getElementById('companyName').textContent = companyName;
         
         if (!localStorage.getItem('authToken')) {
             window.location.href = '/login';
@@ -309,7 +305,6 @@
         
         function logout() {
             localStorage.removeItem('authToken');
-            localStorage.removeItem('companyName');
             window.location.href = '/login';
         }
         
@@ -323,7 +318,8 @@
                 const from = firstDay.toISOString().split('T')[0];
                 const to = lastDay.toISOString().split('T')[0];
                 
-                const response = await fetch(`/api/bookings?companyName=${companyName}&from=${from}&to=${to}`);
+                // No company filter - get ALL bookings
+                const response = await fetch(`/api/bookings?from=${from}&to=${to}`);
                 bookings = await response.json();
                 
                 renderCalendar();
