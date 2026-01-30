@@ -253,6 +253,46 @@ Potential improvements:
 - Calendar integration for scheduling
 - Payment/deposit processing
 
+## Marketing Strategy: Brickell Miami Moving Market
+
+### Target Audience
+Brickell is high-rise condo central with heavy move-in/move-out traffic. Target young professionals (25-45) who value convenience and transparency.
+
+### Facebook/Instagram Ads Strategy
+
+**Targeting:**
+- Location: Brickell + 3-5mi radius
+- Age: 25-45 (young professionals)
+- Life events: Recently moved, new job, engaged (people in transition)
+- Interests: Apartment hunting, Zillow, real estate, "moving"
+- Lookalike audience once you get some customers
+
+**Ad Creative That Works:**
+- "Moving in Brickell? Skip the hassle" — speak to pain points
+- Show before/after of a move (video performs better)
+- Price anchor: "Studios from $X, 1BR from $Y" — reduces friction
+- Testimonials from real customers (even text screenshots)
+- Carousel: "What we handle" — packing, heavy items, building coordination
+
+**Hook Ideas:**
+- "We know Brickell buildings" (elevator reservations, COIs, loading docks)
+- "Same-day quotes via WhatsApp"
+- "No hidden fees" — movers have a shady rep, lean into transparency
+
+### Click-to-WhatsApp Flow
+- Use Meta's Click-to-WhatsApp ad format directly
+- Or link to your `/form?company=YourCompany` for more qualified leads
+- Test both — form = higher intent, direct WhatsApp = more volume
+
+### Budget to Start
+- $20-30/day, test for 2 weeks
+- Kill ads under 2% CTR, scale winners
+
+### Bonus Moves
+- Partner with Brickell leasing offices / concierges (referral fee)
+- Google "movers brickell miami" — see if SEO/Google Ads worth it later
+- Nextdoor posts (free, locals trust it)
+
 ## License
 
 MIT License - feel free to use this for your projects!
