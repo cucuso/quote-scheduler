@@ -1,11 +1,26 @@
-# Simple runtime image for pre-built JAR
+# ---------- Stage 1: Build with Maven ----------
+FROM eclipse-temurin:21-jdk-alpine AS build
+WORKDIR /app
+
+# Install Maven
+RUN apk add --no-cache maven
+
+# Copy pom first for dependency caching
+COPY pom.xml .
+RUN mvn -q dependency:go-offline
+
+# Copy source and build
+COPY src ./src
+RUN mvn -DskipTests package
+
+# ---------- Stage 2: Runtime ----------
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Copy pre-built JAR (build with GitHub Actions or locally)
-COPY target/*.jar app.jar
+# Copy JAR from build stage
+COPY --from=build /app/target/*.jar app.jar
 
-# Create directory for H2 database
+# Create directory for data (if using file-based H2)
 RUN mkdir -p /app/data
 
 EXPOSE 8080

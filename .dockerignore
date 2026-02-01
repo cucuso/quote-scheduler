@@ -10,14 +10,8 @@
 *.iws
 *.ipr
 
-# Build output (exclude most, keep JARs)
-target/classes/
-target/test-classes/
-target/maven-status/
-target/maven-archiver/
-target/generated-sources/
-target/generated-test-sources/
-target/surefire-reports/
+# Build output (build happens inside Docker)
+target/
 *.class
 
 # Data
