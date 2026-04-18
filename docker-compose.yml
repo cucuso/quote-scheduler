@@ -14,8 +14,7 @@ services:
       start_period: 10s
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    restart: unless-stopped
 
   app:
     build:
@@ -33,7 +32,7 @@ services:
       ADMIN_PASSWORD: admin123
       COMPANY_NAME: MyMovingCompany
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     restart: unless-stopped
 
 volumes:
