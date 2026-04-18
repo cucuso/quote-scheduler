@@ -1,6 +1,6 @@
 # Moving Quote Request System - Full Stack Application
 
-A simple full-stack moving company quote request application built with Spring Boot and H2 database.
+A simple full-stack moving company quote request application built with Spring Boot. For local development it can run with a file-based H2 database, and for Docker deployments it can run with PostgreSQL via Docker Compose.
 
 ## Features
 
@@ -35,7 +35,8 @@ A simple full-stack moving company quote request application built with Spring B
   - Detailed view of all customer information and items
 
 - **Backend**:
-  - H2 database with file persistence
+  - H2 database for simple local development
+  - PostgreSQL via Docker Compose for persistent containerized deployments
   - JSON storage for item quantities
   - RESTful API endpoints
   - Automatic timestamp tracking
@@ -43,7 +44,7 @@ A simple full-stack moving company quote request application built with Spring B
 ## Technology Stack
 
 - **Backend**: Spring Boot 3.2.0
-- **Database**: H2 (file-based)
+- **Database**: H2 (local fallback) or PostgreSQL (Docker Compose / production-friendly)
 - **ORM**: Spring Data JPA / Hibernate
 - **Frontend**: HTML, CSS, JavaScript (Vanilla) with Stripe-inspired design
 - **Template Engine**: Thymeleaf
@@ -67,29 +68,38 @@ A simple full-stack moving company quote request application built with Spring B
 - Java 17 or higher
 - Maven 3.6+
 
-### Build and Run
+### Docker Compose
+
+Use Docker Compose when you want the app and a persistent database to come up together:
 
 ```bash
- # 1. Build the native image using Docker (this will take 5-10 minutes)
-  docker build -t scheduler-builder .
-
-  # 2. Extract the binary from the built image
-  docker create --name temp-scheduler scheduler-builder
-  docker cp temp-scheduler:/app/scheduler ./target/scheduler
-  docker rm temp-scheduler
-
-  # 3. Verify the binary was extracted
-  ls -lh target/scheduler
-
-  # 4. Commit and push the binary
-  git add target/scheduler
-  git commit -m "Add pre-built GraalVM native binary for fast cold starts"
-  git push
+docker compose up --build
 ```
 
-The application will start on `http://localhost:8080`
+This starts:
+- `app`: the Spring Boot application on `http://localhost:8080`
+- `db`: a lightweight PostgreSQL database on `localhost:5432`
 
-### Packaging
+The PostgreSQL data lives in the named Docker volume `postgres_data`, so normal rebuilds and redeployments do not wipe your data.
+
+Common commands:
+
+```bash
+# Start in background
+docker compose up --build -d
+
+# Stop containers without deleting database data
+docker compose down
+
+# Stop containers and delete database volume/data
+docker compose down -v
+```
+
+Important note: your data remains safe across `docker compose up`, image rebuilds, and `docker compose down`. You only lose it if you explicitly remove the volume, such as with `docker compose down -v`, `docker volume rm`, or by deleting Docker's local volumes.
+
+### Local Java Run
+
+If you want to run the app directly without Docker, it falls back to the local H2 file database.
 
 ```bash
 # Create executable JAR
@@ -98,6 +108,19 @@ mvn clean package
 # Run the JAR
 java -jar target/scheduler-1.0-SNAPSHOT.jar
 ```
+
+The application will start on `http://localhost:8080`
+
+### Docker Image Only
+
+If you only want a single container and are okay with the app's built-in H2 fallback:
+
+```bash
+docker build -t scheduler .
+docker run --rm -p 8080:8080 scheduler
+```
+
+This mode does not start PostgreSQL for you.
 
 ## Using the Application
 
@@ -135,7 +158,26 @@ java -jar target/scheduler-1.0-SNAPSHOT.jar
 
 ## Database
 
-The application uses H2 database with file persistence. Data is stored in `./data/scheduler.mv.db`
+The application supports two database modes:
+
+- H2 file database for simple non-Docker local development
+- PostgreSQL for Docker Compose and production-style deployments
+
+### Docker Compose Database
+
+When running with Docker Compose, the app connects to PostgreSQL using:
+
+- Host: `db` from inside Docker, `localhost` from your machine
+- Port: `5432`
+- Database: `scheduler`
+- Username: `scheduler`
+- Password: `scheduler`
+
+Data is persisted in the Docker named volume `postgres_data`.
+
+### Local H2 Database
+
+When running without `DATABASE_URL`, the app falls back to H2 file persistence at `./data/scheduler.mv.db`.
 
 ### Quote Request Schema
 ```sql
@@ -168,7 +210,11 @@ CREATE TABLE bookings (
 2. Create a new web service on your platform of choice
 3. Set build command: `mvn clean package`
 4. Set start command: `java -jar target/scheduler-1.0-SNAPSHOT.jar`
-5. Environment variable: `SERVER_PORT=8080` (or as required by platform)
+5. Environment variables:
+   - `PORT=8080` (or as required by platform)
+   - `DATABASE_URL=jdbc:postgresql://...`
+   - `PGUSER=...`
+   - `PGPASSWORD=...`
 
 ### Deploy to VPS
 
@@ -233,7 +279,7 @@ Filter quote requests by tentative moving date range using the dashboard interfa
 The UI is mobile-friendly and adapts to different screen sizes, making it easy for customers to request quotes on any device.
 
 ### Data Persistence
-All quote requests are persisted to disk using H2's file-based storage.
+For Docker Compose deployments, all quote requests are stored in PostgreSQL and survive normal container rebuilds and restarts because the database uses a persistent Docker volume. For non-Docker local development, data is persisted with H2's file-based storage.
 
 ### Multi-language Support
 Track customer language preferences for better service delivery.
